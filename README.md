@@ -8,7 +8,7 @@
 <div align="center">
 <h1>
     <b>
-     FoX: Trustable Just-In-Time Explanations
+     FoX: a Fo rmal eX plainer for JIT Defect Prediction
     </b>
 </h1>
 </div>
