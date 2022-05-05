@@ -1,3 +1,7 @@
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/trustablefox/foxplainer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/trustablefox/foxplainer/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/trustablefox/foxplainer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/trustablefox/foxplainer/context:python)
+[![codecov](https://codecov.io/gh/trustablefox/foxplainer/branch/main/graph/badge.svg?token=DDL15FAP1P)](https://codecov.io/gh/trustablefox/foxplainer)
+
 <p align="center">
 <img src="img/logo.png" width="100" height="100">
  
