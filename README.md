@@ -51,7 +51,7 @@ A user needs to provide the following parameters:
 
 7. **inst_id**: the row number of the instance to be explained in your testing data
 
-Please check out [this demo notebook](https://github.com/foxplainer/foxplainer/blob/main/fox/DEMO.ipynb) as a concrete example.
+Please check out [this demo notebook](https://github.com/trustablefox/foxplainer/blob/main/fox/DEMO.ipynb) as a concrete example.
 
 ## Table of Contents
 
@@ -83,9 +83,7 @@ Will update after double-blind review
 
 ## Contributions
 
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/foxplainer/foxplainer/graphs/contributors).
-
-Please click [here](to-add-after-review) for more information about how to make a contribution to this project.
+We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/trustablefox/foxplainer/graphs/contributors).
 
 ## Documentation  
 Documentation page is ready, we will update and publish after double-blind review.
