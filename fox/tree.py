@@ -58,17 +58,6 @@ def build_tree(tree_, feature_names = None):
     root = extract_data(0, None, feature_names)
     return root
 
-
-def walk_tree(node):
-    if (len(node.children) == 0):
-        # leaf
-        print(node)
-    else:
-        print(node)
-        walk_tree(node.children[0])
-        walk_tree(node.children[1])
-
-
 def count_nodes(root):
     def count(node):
         if len(node.children):
@@ -104,11 +93,6 @@ class Forest:
         self.md = max([dt.tree_.max_depth for dt in rf.estimators()])
         assert([dt.tree_.node_count for dt in rf.estimators()] == [count_nodes(dt) for dt in self.trees])
         
-    def print_trees(self):
-        for i,t in enumerate(self.trees):
-            print("tree number: ", i)
-            walk_tree(t)
-
     def predict_inst(self, inst):
         scores = [predict_tree(dt, inst) for dt in self.trees]
         scores = np.asarray(scores)

@@ -149,19 +149,3 @@ class LRExplainer(object):
                 exps['con'].append(exp)
                 oracle.add_clause([i + 1 for i in sorted(exp)])
             self.hit.update(exp)
-
-    def validate(self, inst, exp, xtype):
-        lbounds = inst.copy()
-        ubounds = inst.copy()
-        if xtype == 'abd':
-            for i in self.hypos:
-                if i not in exp:
-                    lbounds[i] = self.lbounds[i]
-                    ubounds[i] = self.ubounds[i]
-            return self.equal_pred(lbounds, ubounds) == True
-        else:
-            for i in self.hypos:
-                if i in exp:
-                    lbounds[i] = self.lbounds[i]
-                    ubounds[i] = self.ubounds[i]
-            return self.equal_pred(lbounds, ubounds) == False

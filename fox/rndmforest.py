@@ -61,8 +61,6 @@ class Dataset(Data):
         self.mapping_features()
 
     def transform(self, x):
-        if(len(x) == 0):
-            return x
         if (len(x.shape) == 1):
             x = np.expand_dims(x, axis=0)
         return x
@@ -261,9 +259,6 @@ class SATEncoder(object):
             return self.vpool.obj2id[name]
         var = self.vpool.id('{0}'.format(name))
         return var
-
-    def printLits(self, lits):
-        print(["{0}{1}".format("-" if p<0 else "",self.vpool.obj(abs(p))) for p in lits])
 
     def traverse(self, tree, k, clause):
         """
@@ -652,9 +647,6 @@ class SATExplainer(object):
             while True:
                 hset = hitman.get()
                 iters += 1
-                if self.options.verb > 2:
-                    print('iter:', iters)
-                    print('cand:', hset)
                 if hset is None:
                     break
                 self.calls += 1
@@ -675,9 +667,6 @@ class SATExplainer(object):
                             hset.append(h)
                         else:
                             to_hit.append(h)
-
-                    if self.options.verb > 2:
-                        print('coex:', to_hit)
                     hitman.hit(to_hit)
                     self.duals.append(to_hit)
 
@@ -685,17 +674,8 @@ class SATExplainer(object):
                         break
 
                 else:
-                    if self.options.verb > 2:
-                        print('expl:', hset)
                     self.expls.append(hset)
                     if len(self.expls) != self.options.xnum:
                         hitman.block(hset)
                     else:
                         break
-
-    def validate(self, expl, xtype):
-        vtaut = self.enc.newVar('Tautology')
-        if xtype in ('abductive', 'abd'):
-            assert not self.slv.solve(assumptions=[vtaut] + expl)
-        else:
-            assert self.slv.solve(assumptions=[vtaut] + sorted(set(self.assums).difference(set(expl))))
