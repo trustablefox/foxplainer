@@ -74,6 +74,9 @@ Please check out [this demo notebook](https://github.com/trustablefox/foxplainer
 * **[License](#license)**
 
 ## Install FoX Tool
+```bash
+pip3 install -r requirements.txt
+```
 
 ### Install via pip
 ```bash
