@@ -15,7 +15,7 @@
 
 </p>
 
-![FxExplainer demo](./img/fx_demo.gif)
+![FoX demo](./img/fox_demo.gif)
 
 # FoX 
 
