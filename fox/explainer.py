@@ -70,16 +70,16 @@ class FoX(object):
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_exp_html = widgets.HTML(value=self.abd_exp_html)
             con_exp_html = widgets.HTML(value=self.con_exp_html)
-            instance_info_html = widgets.HTML(value=self.instance_info_html)
-            self.tab_nest.children = [abd_exp_html, con_exp_html, instance_info_html]
+            #instance_info_html = widgets.HTML(value=self.instance_info_html)
+            self.tab_nest.children = [abd_exp_html, con_exp_html] # add "instance_info_html" later
             self.tab_nest.set_title(index=0, title="Abductive Exp.")
             self.tab_nest.set_title(index=1, title="Contrastive Exp.")
             self.tab_nest.set_title(index=2, title="Explained Instance")
         else:
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_con_exp_html = widgets.HTML(value=self.abd_con_exp_html)
-            instance_info_html = widgets.HTML(value=self.instance_info_html)
-            self.tab_nest.children = [abd_con_exp_html, instance_info_html]
+            #instance_info_html = widgets.HTML(value=self.instance_info_html)
+            self.tab_nest.children = [abd_con_exp_html] # add "instance_info_html" later
             exp_title = "Abductive Exp." if self.options.xtype == "abd" else "Contrastive Exp."
             self.tab_nest.set_title(index=0, title=exp_title)
             self.tab_nest.set_title(index=1, title="Explained Instance")
