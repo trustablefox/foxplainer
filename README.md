@@ -8,7 +8,7 @@
 <div align="center">
 <h1>
     <b>
-     FoX: Trustable Just-In-Time Explanations
+     FoX: a Fo rmal eX plainer for JIT Defect Prediction
     </b>
 </h1>
 </div>
@@ -38,7 +38,7 @@ fx = FoX(global_model_name="LR",
            proj_name="openstack", 
            data_path="./dataset/",
            inst_id=5)
-fx.explain(in_jupyter=True)
+fx.explain(in_jupyter=False)
 ```
 
 A user needs to provide the following parameters:
