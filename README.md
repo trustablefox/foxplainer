@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/trustablefox/foxplainer/branch/main/graph/badge.svg?token=DDL15FAP1P)](https://codecov.io/gh/trustablefox/foxplainer)
 
 <p align="center">
-<img src="img/logo.png" width="100" height="100">
+<img src="img/new_logo.png" width="100" height="100">
  
 <div align="center">
 <h1>
