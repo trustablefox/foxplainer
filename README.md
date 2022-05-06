@@ -17,7 +17,10 @@
 
 ![FoX demo](./img/fox_demo.gif)
 
-# FoX 
+## Experiment Replication
+**To replicate our experiment in the paper, please go to [this repository](https://github.com/trustablefox/exp_replication).**
+
+## FoX 
 
 ```bibtex
 @underreview{
