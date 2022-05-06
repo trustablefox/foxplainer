@@ -175,20 +175,26 @@ class HtmlString(object):
                                 <text class="title">{title} {exp_type_full}</text>
                             </div>
                         '''
+        if_text = "If"
+        if self.is_explained_instance:
+            if_text = "Feature Values"
         if_box_html = f'''
                         <div class="bot-box-two">
                             <div class="bot-container">
                                 <div class="general-button">
-                                    <text class="general-text">If</text>
+                                    <text class="general-text">{if_text}</text>
                                 </div>
                         '''
 
         condition_html = self.generate_condition_html(fea_val_pair=list_of_pair)
+        then_text = "Then"
+        if self.is_explained_instance:
+            then_text = "Prediction"
         then_box_html = f'''
                         </div>
                         <div class="bot-container">
                             <div class="general-button">
-                                <text class="general-text">Then</text>
+                                <text class="general-text">{then_text}</text>
                             </div>
                         '''
         equal_sign = "&nbsp;&nbsp;&nbsp;&nbsp;="
