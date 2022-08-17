@@ -27,14 +27,22 @@
 }
 ```
 
+## FoX Example
+
+```bash
+git clone https://github.com/trustablefox/quickstart_example.git
+cd quickstart_example
+```
+Then, open the [DEMO.ipynb](https://github.com/trustablefox/quickstart_example/blob/main/DEMO.ipynb) file for a concrete example.
+
 ## Quick Start FoX Tool
 
 ```bash
-cd fox
+pip3 install foxplainer
 ```
 
 ```python
-from explainer import FoX
+from foxplainer.explainer import FoX
 fx = FoX(global_model_name="LR", 
            xnum='all', 
            global_model_path="./global_model/openstack_LR_global_model.pkl", 
@@ -58,8 +66,6 @@ A user needs to provide the following parameters:
 
 7. **inst_id**: the row number of the instance to be explained in your testing data
 
-Please check out [this demo notebook](https://github.com/trustablefox/foxplainer/blob/main/fox/DEMO.ipynb) as a concrete example.
-
 ## Table of Contents
 
 * **[Installation](#installation-fox-tool)**
@@ -80,23 +86,30 @@ pip3 install -r requirements.txt
 
 ### Install via pip
 ```bash
-Will publish to PyPI and update after double-blind review
+pip3 install foxplainer
 ```
 
 ### Install via conda
 ```bash
-Will publish to Anaconda and update after double-blind review
+conda install -c conda-forge foxplainer
 ```
 
 ### Local install via poetry
-Will update after double-blind review
+```bash
+git clone https://github.com/trustablefox/foxplainer.git
+poetry install
+```
+If you do not have poetry installed yet, simply run the command below to install it, for more information, click [here](https://python-poetry.org/docs/).
+```bash
+(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
+```
 
 ## Contributions
 
 We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/trustablefox/foxplainer/graphs/contributors).
 
 ## Documentation  
-Documentation page is ready, we will update and publish after double-blind review.
+Access our official documentation [here](https://foxplainer.readthedocs.io/en/latest/?).
 
 ## License
 [MIT License](https://github.com/trustablefox/foxplainer/blob/main/LICENSE)
