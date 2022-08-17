@@ -32,9 +32,11 @@ jobs:
             ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Run pytest and generate code coverage report
-        run: pytest --cov-report xml --cov=fox tests/
+        run: pytest --cov-report xml --cov=foxplainer tests/
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
           fail_ci_if_error: true
