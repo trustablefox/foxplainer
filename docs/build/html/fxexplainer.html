@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>fxexplainer package &#8212; FxExplainer 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="fxexplainer" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="fxexplainer-package">
+<h1>fxexplainer package<a class="headerlink" href="#fxexplainer-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-fxexplainer.data">
+<span id="fxexplainer-data-module"></span><h2>fxexplainer.data module<a class="headerlink" href="#module-fxexplainer.data" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.data.Data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.data.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_categorical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.data.Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for representing data (transactions).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.data.Data.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.data.Data.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse input file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fxexplainer.explainer">
+<span id="fxexplainer-explainer-module"></span><h2>fxexplainer.explainer module<a class="headerlink" href="#module-fxexplainer.explainer" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.explainer.FxExplainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.explainer.</span></span><span class="sig-name descname"><span class="pre">FxExplainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_model_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.explainer.FxExplainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A FxExplainer object should be initialized with the following attributes to perform the logical explanation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>global_model_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – The name of the black-box global model, currently support 2 models, ‘LR’ for Logistic Regression and ‘RF’ for Random Forest</p></li>
+<li><p><strong>xtype</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Explanation type, currently support 2 types, ‘abd’ for Abductive Explanation and ‘con’ for Concretive Explanation</p></li>
+<li><p><strong>xnum</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>) – Number of explanations to be generated for each instance</p></li>
+<li><p><strong>global_model_path</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path to the global model file in .pkl format trained by the sklearn library</p></li>
+<li><p><strong>proj_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Project name</p></li>
+<li><p><strong>data_path</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path to the data files required for the FxExplainer</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.explainer.FxExplainer.explain">
+<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.explainer.FxExplainer.explain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to perform the logical explanation</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fxexplainer.lrxp">
+<span id="fxexplainer-lrxp-module"></span><h2>fxexplainer.lrxp module<a class="headerlink" href="#module-fxexplainer.lrxp" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.lrxp.</span></span><span class="sig-name descname"><span class="pre">LRExplainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.enumrate">
+<span class="sig-name descname"><span class="pre">enumrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.enumrate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.equal_pred">
+<span class="sig-name descname"><span class="pre">equal_pred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lbounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ubounds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.equal_pred" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.explain">
+<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.explain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.extract_AXp">
+<span class="sig-name descname"><span class="pre">extract_AXp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.extract_AXp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.extract_CXp">
+<span class="sig-name descname"><span class="pre">extract_CXp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.extract_CXp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.extract_bound">
+<span class="sig-name descname"><span class="pre">extract_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.extract_bound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.extract_bounds">
+<span class="sig-name descname"><span class="pre">extract_bounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.extract_bounds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.fix_attr">
+<span class="sig-name descname"><span class="pre">fix_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lbounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ubounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.fix_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.free_attr">
+<span class="sig-name descname"><span class="pre">free_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lbounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ubounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.free_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.lrxp.LRExplainer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.lrxp.LRExplainer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fxexplainer.options">
+<span id="fxexplainer-options-module"></span><h2>fxexplainer.options module<a class="headerlink" href="#module-fxexplainer.options" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.options.Options">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.options.</span></span><span class="sig-name descname"><span class="pre">Options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_model_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.options.Options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for representing command-line options.</p>
+</dd></dl>
+
+</section>
+<section id="module-fxexplainer.rndmforest">
+<span id="fxexplainer-rndmforest-module"></span><h2>fxexplainer.rndmforest module<a class="headerlink" href="#module-fxexplainer.rndmforest" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_categorical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fxexplainer.data.Data" title="fxexplainer.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">fxexplainer.data.Data</span></code></a></p>
+<p>Class for representing dataset (transactions).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.Dataset.mapping_features">
+<span class="sig-name descname"><span class="pre">mapping_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.Dataset.mapping_features" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.Dataset.readable_sample">
+<span class="sig-name descname"><span class="pre">readable_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.Dataset.readable_sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.Dataset.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.Dataset.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.RF2001">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">RF2001</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.RF2001" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The main class to train Random Forest Classifier (RFC).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.RF2001.estimators">
+<span class="sig-name descname"><span class="pre">estimators</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.RF2001.estimators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">SATEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">forest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nof_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended_feature_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Encoder of Random Forest classifier into SAT.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.compute_intervals">
+<span class="sig-name descname"><span class="pre">compute_intervals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.compute_intervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverse all trees in the ensemble and extract intervals for each
+feature.</p>
+<p>At this point, the method only works for numerical datasets!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do the job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.maj_vote_const">
+<span class="sig-name descname"><span class="pre">maj_vote_const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctvars</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.maj_vote_const" title="Permalink to this definition">¶</a></dt>
+<dd><p>capture majority class vote with cardinality constraints (Pseudo Boolean..)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.newVar">
+<span class="sig-name descname"><span class="pre">newVar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.newVar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.printLits">
+<span class="sig-name descname"><span class="pre">printLits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.printLits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATEncoder.traverse">
+<span class="sig-name descname"><span class="pre">traverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clause</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATEncoder.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverse a tree and encode each node.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">SATExplainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sat_enc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preamble</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An SAT-inspired minimal explanation extractor for Random Forest models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.explain">
+<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.explain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hypotheses minimization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.extract_mus">
+<span class="sig-name descname"><span class="pre">extract_mus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.extract_mus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute any subset-minimal explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.mhs_mcs_enumeration">
+<span class="sig-name descname"><span class="pre">mhs_mcs_enumeration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.mhs_mcs_enumeration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerate subset- and cardinality-minimal contrastive explanations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.mhs_mus_enumeration">
+<span class="sig-name descname"><span class="pre">mhs_mus_enumeration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.mhs_mus_enumeration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerate subset- and cardinality-minimal explanations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the oracle for computing an explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.SATExplainer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.SATExplainer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.VotingRF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">VotingRF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimators</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.VotingRF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble._voting.VotingClassifier</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.VotingRF.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#fxexplainer.rndmforest.VotingRF.steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.XRF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">XRF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.XRF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>class to encode and explain Random Forest classifiers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.XRF.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.XRF.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode a tree ensemble trained previously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.XRF.explain">
+<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.XRF.explain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explain a prediction made for a given sample with a previously
+trained RF.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.rndmforest.pickle_load_file">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.rndmforest.</span></span><span class="sig-name descname"><span class="pre">pickle_load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.rndmforest.pickle_load_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-fxexplainer.train_global_model">
+<span id="fxexplainer-train-global-model-module"></span><h2>fxexplainer.train_global_model module<a class="headerlink" href="#module-fxexplainer.train_global_model" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.train_global_model.load_change_metrics_df">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.train_global_model.</span></span><span class="sig-name descname"><span class="pre">load_change_metrics_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cur_proj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.train_global_model.load_change_metrics_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-fxexplainer.tree">
+<span id="fxexplainer-tree-module"></span><h2>fxexplainer.tree module<a class="headerlink" href="#module-fxexplainer.tree" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.tree.Forest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">Forest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.Forest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An ensemble of decision trees.</p>
+<p>This object provides a common interface to many different types of models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.tree.Forest.predict_inst">
+<span class="sig-name descname"><span class="pre">predict_inst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.Forest.predict_inst" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fxexplainer.tree.Forest.print_trees">
+<span class="sig-name descname"><span class="pre">print_trees</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.Forest.print_trees" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.tree.build_tree">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">build_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.build_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.tree.count_nodes">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">count_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.count_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fxexplainer.tree.dt_node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">dt_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.dt_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">anytree.node.node.Node</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.tree.predict_tree">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">predict_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.predict_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fxexplainer.tree.walk_tree">
+<span class="sig-prename descclassname"><span class="pre">fxexplainer.tree.</span></span><span class="sig-name descname"><span class="pre">walk_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fxexplainer.tree.walk_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-fxexplainer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-fxexplainer" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">FxExplainer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fxexplainer</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">fxexplainer package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">fxexplainer</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">fxexplainer</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Michael Fu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/fxexplainer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

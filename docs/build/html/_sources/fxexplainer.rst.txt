@@ -1,0 +1,69 @@
+fxexplainer package
+===================
+
+Submodules
+----------
+
+fxexplainer.data module
+-----------------------
+
+.. automodule:: fxexplainer.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.explainer module
+----------------------------
+
+.. automodule:: fxexplainer.explainer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.lrxp module
+-----------------------
+
+.. automodule:: fxexplainer.lrxp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.options module
+--------------------------
+
+.. automodule:: fxexplainer.options
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.rndmforest module
+-----------------------------
+
+.. automodule:: fxexplainer.rndmforest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.train\_global\_model module
+---------------------------------------
+
+.. automodule:: fxexplainer.train_global_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fxexplainer.tree module
+-----------------------
+
+.. automodule:: fxexplainer.tree
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: fxexplainer
+   :members:
+   :undoc-members:
+   :show-inheritance:

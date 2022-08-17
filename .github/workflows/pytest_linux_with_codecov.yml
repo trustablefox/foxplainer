@@ -1,0 +1,40 @@
+name: pytest with codecov in Linux Environment
+
+on: [push]
+
+jobs:
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+        env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+        env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+        if: steps.cache.outputs.cache-hit != 'true'
+        env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Run pytest and generate code coverage report
+        run: pytest --cov-report xml --cov=fox tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
