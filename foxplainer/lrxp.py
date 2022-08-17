@@ -1,6 +1,6 @@
 import pandas as pd
 import pickle
-from pysat.solvers import Solver
+from .pysat.solvers import Solver
 
 
 class LRExplainer(object):

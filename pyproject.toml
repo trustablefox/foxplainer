@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "foxplainer"
-version = "0.1.0"
+version = "0.1.4"
 description = "FoX: a Fo rmal eX plainer for JIT Defect Prediction"
 authors = ["Jinqiang Yu <trustablefox@gmail.com>"]
 license = "MIT"
@@ -12,7 +12,6 @@ pandas = "^1.4.3"
 ipywidgets = "^7.7.1"
 anytree = "^2.8.0"
 scikit-learn = "^1.1.2"
-python-sat = "^0.1.7-alpha.19"
 numpy = "^1.23.2"
 
 [tool.poetry.dev-dependencies]
