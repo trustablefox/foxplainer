@@ -3,9 +3,11 @@ from .lrxp import LRExplainer
 from .options import Options
 from .rndmforest import XRF, Dataset
 from .html_string import HtmlString
+
 import pandas as pd
 import ipywidgets as widgets
-
+import collections
+import matplotlib.pyplot as plt
 
 class FoX(object):
     """A FoX object should be initialized with the following attributes to perform the logical explanation
@@ -103,7 +105,6 @@ class FoX(object):
                     self.explainer = LRExplainer(data, options)
                 
                 _, _, explained_instance, explanation_list, explanation_size_list = self.explainer.explain(inst)
-
                 if in_jupyter:
                     explained_instance = self.exp_mapping(explained_instance)
                     if self.options.xnum not in (-1, 'all'):
@@ -123,8 +124,8 @@ class FoX(object):
                         self.exp_to_html(exp_list=explanation_list['abd'], exp_type='abd', explained_instance=explained_instance)
                         self.exp_to_html(exp_list=explanation_list['con'], exp_type='con', explained_instance=explained_instance)
                         self.show_in_jupyter(show_both_exp=True) 
-                        # explanation_list['abd'] stores all AXps,  explanation_size_list['abd'] store all axp size
-                        # explanation_list['con'] stores all CXps,  explanation_size_list['con'] store all cxp size
+                        ffa = self.ffa(explanation_list)
+                        self.visulise_ffa(ffa)
                 else:
                     if self.options.xnum not in (-1, 'all'):
                         exp_type_name = "Abductive" if self.options.xtype == "abd" else "Contrastive"
@@ -139,6 +140,8 @@ class FoX(object):
                             for i, expl in enumerate(explanation_list[xtype]):
                                 explanation_size = explanation_size_list[xtype][i]
                                 print(' ', expl, "\n\n ", explanation_size, "\n\n")
+                        ffa = self.ffa(explanation_list)
+                        print('FFA:\n{}'.format(ffa))
 
     def exp_mapping(self, if_else_text):
         # use list to preserve the order of the if-else statements
@@ -154,3 +157,66 @@ class FoX(object):
         label_value = if_else_text.split('THEN')[1].strip().split("=")
         mapped.append([label_value[0].strip(), label_value[1].strip()])
         return mapped
+    
+    def ffa(self, explanation_list):
+        """
+        unweighted feature attribution
+        """
+        axps = map(lambda l: l.split('IF ', maxsplit=1)[-1].rsplit(' THEN ', maxsplit=1)[0].split(' AND '), 
+                   explanation_list['abd'])
+        axps_ = []
+        for xp in axps:
+            axps_.append(list(map(lambda l: l.split(' = ', maxsplit=1)[0].strip(), xp)))
+
+        lit_count = collections.defaultdict(lambda: 0)
+        nof_axps = len(axps_)
+        for axp in axps_:
+            for lit in axp:
+                lit_count[lit] += 1
+        lit_count = {lit: cnt/nof_axps for lit, cnt in lit_count.items()}
+        return lit_count
+
+    def visulise_ffa(self, f2imprt):
+        names = []
+        values = []
+        for f in sorted(f2imprt.keys(), key=lambda l: (abs(f2imprt[l]), l)):
+            names.append(f)
+            values.append(f2imprt[f])
+        
+        plt.rcParams['axes.linewidth'] = 2
+        fig, ax = plt.subplots()
+        # Fig size
+        fig.set_size_inches(4, 4)
+
+        for n, v in zip(names, values):
+            if v > 0:
+                ax.barh(y=[n], width=[v], alpha=0.4, height=0.3, color=(0.2, 0.4, 0.6, 0.6))  # '#86bf91', zorder=2)
+            else:
+                ax.barh(y=[n], width=[v], alpha=0.8, height=0.3, color='orange')  # 86bf91')
+
+        # Despine
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        #ax.spines['left'].set_visible(False)
+        ax.spines['left'].set_position('zero')
+        ax.spines['bottom'].set_visible(False)
+        #ax.spines['bottom'].set_position('zero')
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+        ax.tick_params(axis='y', pad=3, labelsize=15)
+
+        for h, (n, v) in enumerate(zip(names, values)):
+            ax.text(v, h+.18, '{:.2f}'.format(v), color='black',
+                    horizontalalignment='left' if v > 0 else 'right',
+                    #verticalalignment='top',
+                    #(0.2, 0.4, 0.6, 0.6),
+                    fontsize=15)#, fontweight='bold')
+
+            ax.text(-.003 if v > 0 else .003, h-.05, n, color='black',
+                    horizontalalignment='right' if v > 0 else 'left',
+                    #verticalalignment='top',
+                    #(0.2, 0.4, 0.6, 0.6),
+                    fontsize=15)#, fontweight='bold')
+
+        plt.show()
+        plt.close()
