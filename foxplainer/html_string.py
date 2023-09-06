@@ -164,6 +164,9 @@ class HtmlString(object):
         elif exp_type == "con":
             title = "How?"
             exp_type_full = "Contrastive Explanation"
+        elif exp_type == "ffa":
+            title = "FFA-TITLE (TODO)"
+            exp_type_full = "FFA (TODO)"
 
         if self.is_explained_instance:
             title = "Explained Instance"

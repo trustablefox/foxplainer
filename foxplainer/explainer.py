@@ -1,4 +1,5 @@
 from __future__ import print_function
+
 from .lrxp import LRExplainer
 from .options import Options
 from .rndmforest import XRF, Dataset
@@ -45,6 +46,7 @@ class FoX(object):
         self.abd_con_exp_html = ""
         self.abd_exp_html = ""
         self.con_exp_html = ""
+        self.ffa_exp_html = ""
         self.instance_info_html = ""
 
     def exp_to_html(self, exp_list, exp_type, explained_instance):
@@ -57,23 +59,35 @@ class FoX(object):
                 self.abd_exp_html += HtmlString(list_of_pair=exp, exp_type="abd").get_html()
             elif exp_type == "con":
                 self.con_exp_html += HtmlString(list_of_pair=exp, exp_type="con").get_html()
+            elif exp_type == "ffa":
+                self.ffa_exp_html += HtmlString(list_of_pair=exp, exp_type="ffa").get_html()
 
     def show_in_jupyter(self, show_both_exp=False) -> None:
         if show_both_exp:
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_exp_html = widgets.HTML(value=self.abd_exp_html)
             con_exp_html = widgets.HTML(value=self.con_exp_html)
-            #instance_info_html = widgets.HTML(value=self.instance_info_html)
-            self.tab_nest.children = [abd_exp_html, con_exp_html] # add "instance_info_html" later
+            if self.ffa_exp_html != "":
+                ffa_exp_html = widgets.HTML(value=self.ffa_exp_html)
+                self.tab_nest.children = [abd_exp_html, con_exp_html, ffa_exp_html] 
+            else:
+                #instance_info_html = widgets.HTML(value=self.instance_info_html)
+                self.tab_nest.children = [abd_exp_html, con_exp_html] # add "instance_info_html" later
             self.tab_nest.set_title(index=0, title="Abductive Exp.")
             self.tab_nest.set_title(index=1, title="Contrastive Exp.")
             self.tab_nest.set_title(index=2, title="Explained Instance")
+            self.tab_nest.set_title(index=3, title="FFA Exp.")
         else:
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_con_exp_html = widgets.HTML(value=self.abd_con_exp_html)
             #instance_info_html = widgets.HTML(value=self.instance_info_html)
             self.tab_nest.children = [abd_con_exp_html] # add "instance_info_html" later
-            exp_title = "Abductive Exp." if self.options.xtype == "abd" else "Contrastive Exp."
+            if self.options.xtype == "abd":
+                exp_title = "Abductive Exp."
+            elif self.options.xtype == "con":
+                exp_title = "Contrastive Exp."
+            elif self.options.xtype == "ffa":
+                exp_title = "FFA (TODO)"
             self.tab_nest.set_title(index=0, title=exp_title)
             self.tab_nest.set_title(index=1, title="Explained Instance")
         from IPython.display import display
@@ -123,9 +137,27 @@ class FoX(object):
                         # abd exp
                         self.exp_to_html(exp_list=explanation_list['abd'], exp_type='abd', explained_instance=explained_instance)
                         self.exp_to_html(exp_list=explanation_list['con'], exp_type='con', explained_instance=explained_instance)
-                        self.show_in_jupyter(show_both_exp=True) 
+                        
                         ffa = self.ffa(explanation_list)
-                        self.visulise_ffa(ffa)
+                        if ffa != {}:
+                            ffa_explained_instance = []
+                            for k, v in ffa.items():
+                                ffa_explained_instance.append([k, v])
+                            ffa_exp_list = "IF "
+                            for kv in ffa_explained_instance:
+                                ffa_exp_list += f"{kv[0]} = {kv[1]} AND "            
+                            ffa_exp_list = ffa_exp_list.strip("AND ")
+                            if len(explanation_list['abd']) > 0:
+                                label = explanation_list['abd'][0].split("THEN")[-1].split("=")[0].strip()
+                                pred = explanation_list['abd'][0].split("THEN")[-1].split("=")[1].strip()
+                            else:
+                                label = explanation_list['con'][0].split("THEN")[-1].split("=")[0].strip()
+                                pred = explanation_list['con'][0].split("THEN")[-1].split("=")[1].strip()
+                                pred = "True" if pred == "False" else "False"
+                            ffa_exp_list += f" THEN {label} = {pred}"
+                            ffa_exp_list = [ffa_exp_list]
+                            self.exp_to_html(exp_list=ffa_exp_list, exp_type='ffa', explained_instance=ffa_explained_instance)
+                        self.show_in_jupyter(show_both_exp=True)                        
                 else:
                     if self.options.xnum not in (-1, 'all'):
                         exp_type_name = "Abductive" if self.options.xtype == "abd" else "Contrastive"

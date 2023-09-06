@@ -8,10 +8,12 @@ import collections
 from six.moves import range
 import six
 import math
+
 from .pysat.formula import CNF, IDPool
 from .pysat.solvers import Solver
 from .pysat.card import CardEnc, EncType
 from .pysat.examples.hitman import Hitman
+
 import pickle
 
 

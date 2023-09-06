@@ -1,7 +1,7 @@
 import pandas as pd
 import pickle
-from .pysat.solvers import Solver
 
+from .pysat.solvers import Solver
 
 class LRExplainer(object):
     def __init__(self, data, options):
@@ -53,6 +53,7 @@ class LRExplainer(object):
     def explain(self, inst):
         self.hypos = list(range(len(inst)))
         pred = self.model.predict([inst])[0]
+        self.pred = pred
         self.time = {'abd': 0, 'con': 0}
         self.exps = {'abd': [], 'con': []}
         if self.options.xnum not in (-1, 'all'):
