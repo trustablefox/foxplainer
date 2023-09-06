@@ -72,12 +72,12 @@ class FoX(object):
                 self.tab_nest.children = [abd_exp_html, con_exp_html, ffa_exp_html]
                 self.tab_nest.set_title(index=0, title="Abductive Exp.")
                 self.tab_nest.set_title(index=1, title="Contrastive Exp.")
+                self.tab_nest.set_title(index=2, title="Formal Feature Attribution")
             else:
                 #instance_info_html = widgets.HTML(value=self.instance_info_html)
                 self.tab_nest.children = [abd_exp_html, con_exp_html] # add "instance_info_html" later
                 self.tab_nest.set_title(index=0, title="Abductive Exp.")
                 self.tab_nest.set_title(index=1, title="Contrastive Exp.")
-                self.tab_nest.set_title(index=2, title="Formal Feature Attribution")
         else:
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_con_exp_html = widgets.HTML(value=self.abd_con_exp_html)
