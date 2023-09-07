@@ -233,7 +233,8 @@ class XRF(object):
         self.x = SATExplainer(self.enc, inps, preamble, self.label, self.data.class_names, options=self.options, verb=self.verbose)
         inst = self.data.transform(np.array(inst))[0]
         expls, time, explained_instance, explanation, explanation_size = self.x.explain(np.array(inst))
-        return expls, time, explained_instance, explanation, explanation_size
+        pred = self.cls.forest.predict([inst])[0]
+        return expls, time, explained_instance, explanation, explanation_size, pred
 
 
 class SATEncoder(object):

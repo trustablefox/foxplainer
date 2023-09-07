@@ -46,10 +46,11 @@ class FoX(object):
         self.abd_con_exp_html = ""
         self.abd_exp_html = ""
         self.con_exp_html = ""
-        self.ffa_exp_html = ""
         self.instance_info_html = ""
+        self.ffa_fig = None
+        self.pred = None
 
-    def exp_to_html(self, exp_list, exp_type, explained_instance):
+    def exp_to_html(self, exp_list=None, exp_type=None, explained_instance=None):
         for exp in exp_list:
             exp = self.exp_mapping(exp)
             if self.explained_instance == "":
@@ -59,17 +60,14 @@ class FoX(object):
                 self.abd_exp_html += HtmlString(list_of_pair=exp, exp_type="abd").get_html()
             elif exp_type == "con":
                 self.con_exp_html += HtmlString(list_of_pair=exp, exp_type="con").get_html()
-            elif exp_type == "ffa":
-                self.ffa_exp_html += HtmlString(list_of_pair=exp, exp_type="ffa").get_html()
 
     def show_in_jupyter(self, show_both_exp=False) -> None:
         if show_both_exp:
             self.accordion.set_title(index=0, title=[f"Instance ID {self.inst_id}"])
             abd_exp_html = widgets.HTML(value=self.abd_exp_html)
             con_exp_html = widgets.HTML(value=self.con_exp_html)
-            if self.ffa_exp_html != "":
-                ffa_exp_html = widgets.HTML(value=self.ffa_exp_html)
-                self.tab_nest.children = [abd_exp_html, con_exp_html, ffa_exp_html]
+            if self.ffa_fig is not None:
+                self.tab_nest.children = [abd_exp_html, con_exp_html, self.ffa_fig]
                 self.tab_nest.set_title(index=0, title="Abductive Exp.")
                 self.tab_nest.set_title(index=1, title="Contrastive Exp.")
                 self.tab_nest.set_title(index=2, title="Formal Feature Attribution")
@@ -119,7 +117,8 @@ class FoX(object):
                 elif options.global_model_name == 'LR':
                     self.explainer = LRExplainer(data, options)
                 
-                _, _, explained_instance, explanation_list, explanation_size_list = self.explainer.explain(inst)
+                _, _, explained_instance, explanation_list, explanation_size_list, self.pred = self.explainer.explain(inst)
+                
                 if in_jupyter:
                     explained_instance = self.exp_mapping(explained_instance)
                     if self.options.xnum not in (-1, 'all'):
@@ -141,23 +140,36 @@ class FoX(object):
                         
                         ffa = self.ffa(explanation_list)
                         if ffa != {}:
-                            ffa_explained_instance = []
-                            for k, v in ffa.items():
-                                ffa_explained_instance.append([k, v])
-                            ffa_exp_list = "IF "
-                            for kv in ffa_explained_instance:
-                                ffa_exp_list += f"{kv[0]} = {kv[1]} AND "            
-                            ffa_exp_list = ffa_exp_list.strip("AND ")
-                            if len(explanation_list['abd']) > 0:
-                                label = explanation_list['abd'][0].split("THEN")[-1].split("=")[0].strip()
-                                pred = explanation_list['abd'][0].split("THEN")[-1].split("=")[1].strip()
+                            self.save_ffa_graph(ffa)
+                            title = ""
+                            exp_type_full = "Formal Feature Attribution"
+                            
+                            if str(self.pred) == "True":
+                                color = "rgba(237,34,14,255)"
                             else:
-                                label = explanation_list['con'][0].split("THEN")[-1].split("=")[0].strip()
-                                pred = explanation_list['con'][0].split("THEN")[-1].split("=")[1].strip()
-                                pred = "True" if pred == "False" else "False"
-                            ffa_exp_list += f" THEN {label} = {pred}"
-                            ffa_exp_list = [ffa_exp_list]
-                            self.exp_to_html(exp_list=ffa_exp_list, exp_type='ffa', explained_instance=ffa_explained_instance)
+                                color = "rgba(96,217,55,255)"
+                            equal_sign = "&nbsp;&nbsp;&nbsp;&nbsp;="
+                            label_title = "Defect"
+                            ffa_html = f'''
+                                        <div class="box">
+                                            <div class="inner-box">
+                                                <text class="title">{title} {exp_type_full}</text>
+                                            </div>
+                                            <div class="bot-box-two" style="text-align: center;">
+                                                <img src="./temp.png">
+                                            </div>
+                                            
+                                            <div class="input-box">
+                                                <div class="input-inner-box-grid-ffa" style="background-color: {color};">
+                                                    <text class="general-text">{label_title}{equal_sign}</text>
+                                                    <div class="input-container">
+                                                        <text class="input_text">{self.pred}</text>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        '''
+                            self.ffa_fig = widgets.HTML(value=ffa_html)
                         self.show_in_jupyter(show_both_exp=True)                        
                 else:
                     if self.options.xnum not in (-1, 'all'):
@@ -209,7 +221,7 @@ class FoX(object):
         lit_count = {lit: cnt/nof_axps for lit, cnt in lit_count.items()}
         return lit_count
 
-    def visulise_ffa(self, f2imprt):
+    def save_ffa_graph(self, f2imprt):
         names = []
         values = []
         for f in sorted(f2imprt.keys(), key=lambda l: (abs(f2imprt[l]), l)):
@@ -250,6 +262,5 @@ class FoX(object):
                     #verticalalignment='top',
                     #(0.2, 0.4, 0.6, 0.6),
                     fontsize=15)#, fontweight='bold')
-
-        plt.show()
+        plt.savefig('./temp.png')
         plt.close()

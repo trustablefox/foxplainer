@@ -110,6 +110,18 @@ class HtmlString(object):
         padding: 0 5px;
         }
 
+        .input-inner-box-grid-ffa {
+        background-color: rgba(86,194,255,255);
+        border-radius: 10px;
+        height:40px;
+        width: 20%;
+        display: grid;
+        grid-template-columns: 68% 32%;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5px;
+        }
+        
         .input-inner-text {
         justify-content: center;
         align-items: center;
@@ -164,9 +176,6 @@ class HtmlString(object):
         elif exp_type == "con":
             title = "How?"
             exp_type_full = "Contrastive Explanation"
-        elif exp_type == "ffa":
-            title = ""
-            exp_type_full = "Formal Feature Attribution"
 
         if self.is_explained_instance:
             title = "Explained Instance"

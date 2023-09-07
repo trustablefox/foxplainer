@@ -3,6 +3,7 @@ import pickle
 
 from .pysat.solvers import Solver
 
+
 class LRExplainer(object):
     def __init__(self, data, options):
 
@@ -53,7 +54,6 @@ class LRExplainer(object):
     def explain(self, inst):
         self.hypos = list(range(len(inst)))
         pred = self.model.predict([inst])[0]
-        self.pred = pred
         self.time = {'abd': 0, 'con': 0}
         self.exps = {'abd': [], 'con': []}
         if self.options.xnum not in (-1, 'all'):
@@ -97,7 +97,7 @@ class LRExplainer(object):
                                                              pred))
                     print('Explanation Size: {0}'.format(len(exp_)))
                 """
-        return self.exps, self.time, explained_instance, explanation_list, explanation_size_list
+        return self.exps, self.time, explained_instance, explanation_list, explanation_size_list, pred
 
     def extract_AXp(self, inst, seed=set()):
         lbounds = inst.copy()
